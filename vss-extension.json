@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "name": "Azure Pipelines Approval",
   "description": "A simple way for view and approve releases",
-  "publisher": "gustavobergamim",
+  "publisher": "iPSLApprovals",
   "demands": [
     "api-version/5.1"
   ],
@@ -22,7 +22,7 @@
   ],
   "content": {
     "details": {
-      "path": "MarketPlace.md"
+      "path": "README.md"
     },
     "license": {
       "path": "license.txt"
@@ -30,17 +30,6 @@
   },
   "icons": {
     "default": "img/server_accept_black.png"
-  },
-  "links": {
-    "repository": {
-      "uri": "https://github.com/gustavobergamim/azdevops-pipeline-approval"
-    },
-    "issues": {
-      "uri": "https://github.com/gustavobergamim/azdevops-pipeline-approval/issues"
-    },
-    "support": {
-      "uri": "https://github.com/gustavobergamim/azdevops-pipeline-approval"
-    }
   },
   "repository": {
     "type": "git",
