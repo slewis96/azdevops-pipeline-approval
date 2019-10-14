@@ -22,7 +22,6 @@ export default class ReleaseApprovalGrid extends React.Component {
     static events = new Events.EventEmitter();
     static EVENT_APPROVE = "approve";
     static EVENT_REJECT = "reject";
-
     _releaseService: ReleaseApprovalService = new ReleaseApprovalService();
     _tableRowShimmer = new Array(5).fill(new ObservableValue<IReleaseApproval | undefined>(undefined));
     _tableRowData: ObservableArray<IReleaseApproval> = new ObservableArray<IReleaseApproval>(this._tableRowShimmer);
@@ -83,7 +82,12 @@ export default class ReleaseApprovalGrid extends React.Component {
 
         const onConfirmDialog = async () => {
             this._isDialogOpen.value = false;
-            await this._releaseService.approveAll(this._selectedReleases.value, "");
+            const comment = document.getElementById("comment") as HTMLInputElement;
+            if(this._dialogBodyAction.value == "approve"){
+                await this._releaseService.approveAll(this._selectedReleases.value, comment.value);
+            } else if(this._dialogBodyAction.value == "reject") {
+                await this._releaseService.rejectAll(this._selectedReleases.value, comment.value);
+            }
             this._selectedReleases = new ArrayItemProvider<IReleaseApproval>([]);
             setTimeout(() => this.refreshGrid(), 1000);
         }
@@ -121,6 +125,7 @@ export default class ReleaseApprovalGrid extends React.Component {
                                         renderRow={this._renderListRow}
                                         width="100%"
                                     />
+                                    Comment: {(document.getElementById("comment") as HTMLInputElement).value}
                                 </Dialog>
                             ) : null;
                         }}
