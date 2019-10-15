@@ -1,7 +1,7 @@
 import { ReleaseApproval } from "azure-devops-extension-api/Release";
 
 export interface IReleaseApproval extends ReleaseApproval {
-    definition: string;
+    definition: HTMLElement;
     number: string;
     environment: string;
 }

@@ -171,6 +171,9 @@ export default class ReleaseApprovalGrid extends React.Component {
         const approvals = await this._releaseService.listAll();
         this._tableRowData.removeAll();
         this._tableRowData.push(...approvals);
+        //set defintino links to open in new tab
+        const elements = document.getElementsByClassName("bolt-list-cell-child flex-row flex-center scroll-hidden bolt-link subtle")
+        for(var i = 0; i < elements.length; i++){elements[i].setAttribute("target", "_blank");}
     }
 
     async refreshGrid(): Promise<void> {
