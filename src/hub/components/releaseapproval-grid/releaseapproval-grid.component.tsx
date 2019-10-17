@@ -84,9 +84,9 @@ export default class ReleaseApprovalGrid extends React.Component {
             this._isDialogOpen.value = false;
             const comment = document.getElementById("comment") as HTMLInputElement;
             if(this._dialogBodyAction.value == "approve"){
-                await this._releaseService.approveAll(this._selectedReleases.value, comment.value);
+                await this._releaseService.approveAll(this._selectedReleases.value, ("Mass - " + comment.value));
             } else if(this._dialogBodyAction.value == "reject") {
-                await this._releaseService.rejectAll(this._selectedReleases.value, comment.value);
+                await this._releaseService.rejectAll(this._selectedReleases.value, ("Mass - " + comment.value));
             }
             this._selectedReleases = new ArrayItemProvider<IReleaseApproval>([]);
             setTimeout(() => this.refreshGrid(), 1000);
@@ -119,7 +119,7 @@ export default class ReleaseApprovalGrid extends React.Component {
                                     ]}
                                     onDismiss={onDismissDialog}
                                 >
-                                    Confirm that you want to {this._dialogBodyAction.value} the following releases:
+                                    Confirm that you want to {this._dialogBodyAction.value} {this._selectedReleases.length == 1 ? this._selectedReleases.length + " release" : this._selectedReleases.length + " releases"}:
                                     <ScrollableList
                                         itemProvider={this._selectedReleases}
                                         renderRow={this._renderListRow}

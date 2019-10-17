@@ -16,20 +16,20 @@ export class ReleaseApprovalService {
         const projname = project!.name;
         const projecturl = await "https://dev.azure.com/"+orgname+"/"+projname;
         const user = await SDK.getUser();
-        if (!project) return [];
 
+        if (!project) return [];
         let client: ReleaseRestClient = getClient(ReleaseRestClient);
         let approvals = await client.getApprovals(project.name, user.name, undefined, undefined, undefined, top);
         return approvals.map(a => {
             const relurl = projecturl + "/_releaseProgress?releaseId="+a.release.id;
+            var appType = a.approvalType == 1 ? " (Pre)" : " (Post)";
             var element = document.createElement('a');
-            element.setAttribute('target', "_blank");
             element.setAttribute('href', relurl);
             element.innerHTML = a.releaseDefinition.name;
             return {
                 definition: element,
                 number: a.release.name,
-                environment: a.releaseEnvironment.name,
+                environment: a.releaseEnvironment.name + appType,
                 ...a
             }
         });
