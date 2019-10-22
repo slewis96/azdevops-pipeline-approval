@@ -19,7 +19,7 @@ export class ReleaseApprovalService {
 
         if (!project) return [];
         let client: ReleaseRestClient = getClient(ReleaseRestClient);
-        let approvals = await client.getApprovals(project.name, user.name, undefined, undefined, undefined, top);
+        let approvals = await client.getApprovals(project.name, user.name, undefined, undefined, undefined, top, undefined, undefined, true);
         return approvals.map(a => {
             const relurl = projecturl + "/_releaseProgress?releaseId="+a.release.id;
             var appType = a.approvalType == 1 ? " (Pre)" : " (Post)";
