@@ -123,7 +123,7 @@ export default class ReleaseApprovalGrid extends React.Component {
                                     <ScrollableList
                                         itemProvider={this._selectedReleases}
                                         renderRow={this._renderListRow}
-                                        width="100%"
+                                        width="auto"
                                     />
                                     Comment: {(document.getElementById("comment") as HTMLInputElement).value}
                                 </Dialog>
